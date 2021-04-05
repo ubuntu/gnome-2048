@@ -1,0 +1,60 @@
+name: gnome-2048
+adopt-info: gnome-2048
+grade: stable
+confinement: strict
+base: core20
+
+# Launchpad doesn't recognize these fields yet
+passthrough:
+  license: GPL-3.0+
+  title: GNOME 2048
+
+slots:
+  # for GtkApplication registration
+  gnome-2048:
+    interface: dbus
+    bus: session
+    name: org.gnome.TwentyFortyEight
+
+apps:
+  gnome-2048:
+    extensions: [gnome-3-38]
+    command: usr/bin/gnome-2048
+    desktop: usr/share/applications/org.gnome.TwentyFortyEight.desktop
+    common-id: org.gnome.TwentyFortyEight
+
+parts:
+  libgnome-games-support:
+    source: https://gitlab.gnome.org/GNOME/libgnome-games-support.git
+    source-type: git
+    plugin: meson
+    meson-parameters: [--prefix=/usr]
+    organize:
+      snap/gnome-2048/current/usr: usr
+
+  gnome-2048:
+    after: [ libgnome-games-support ]
+    source: https://gitlab.gnome.org/GNOME/gnome-2048.git
+    source-type: git
+    source-tag: 3.38.2
+    plugin: meson
+    meson-parameters: [--prefix=/usr]
+    parse-info: [usr/share/metainfo/org.gnome.TwentyFortyEight.appdata.xml]
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags --abbrev=10)
+      sed -i.bak -e "s|'gnome-2048',|'gnome-2048', symlink_media: false,|g" help/meson.build
+    organize:
+      snap/gnome-2048/current/usr: usr
+
+  # Find files provided by the base and platform snap and ensure they aren't
+  # duplicated in this snap
+  cleanup:
+    after: [gnome-2048]
+    plugin: nil
+    build-snaps: [core20, gtk-common-themes, gnome-3-38-2004]
+    override-prime: |
+      set -eux
+      for snap in "core20" "gtk-common-themes" "gnome-3-38-2004"; do
+        cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
+      done
