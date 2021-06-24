@@ -24,16 +24,7 @@ apps:
     common-id: org.gnome.TwentyFortyEight
 
 parts:
-  libgnome-games-support:
-    source: https://gitlab.gnome.org/GNOME/libgnome-games-support.git
-    source-type: git
-    plugin: meson
-    meson-parameters: [--prefix=/usr]
-    organize:
-      snap/gnome-2048/current/usr: usr
-
   gnome-2048:
-    after: [ libgnome-games-support ]
     source: https://gitlab.gnome.org/GNOME/gnome-2048.git
     source-type: git
     source-tag: 3.38.2
