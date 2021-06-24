@@ -37,6 +37,11 @@ parts:
       sed -i.bak -e "s|'gnome-2048',|'gnome-2048', symlink_media: false,|g" help/meson.build
     organize:
       snap/gnome-2048/current/usr: usr
+    build-packages:
+      - libdbus-1-dev
+      - libmtdev1
+      - libwacom2
+      - libevdev2
 
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
