@@ -29,7 +29,7 @@ parts:
     source-type: git
     source-tag: 3.38.2
     plugin: meson
-    meson-parameters: [--prefix=/usr]
+    meson-parameters: [--prefix=/snap/gnome-2048/current/usr]
     parse-info: [usr/share/metainfo/org.gnome.TwentyFortyEight.appdata.xml]
     override-pull: |
       snapcraftctl pull
