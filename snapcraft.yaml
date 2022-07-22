@@ -22,6 +22,8 @@ apps:
     command: usr/bin/gnome-2048
     desktop: usr/share/applications/org.gnome.TwentyFortyEight.desktop
     common-id: org.gnome.TwentyFortyEight
+    environment:
+      DISABLE_WAYLAND: 'true'
 
 parts:
   gnome-2048:
