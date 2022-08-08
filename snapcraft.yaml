@@ -40,8 +40,6 @@ parts:
       craftctl set version=$(git describe --tags --abbrev=10)
       patch -p1 < $CRAFT_PROJECT_DIR/patches/patch1.diff
       sed -i.bak -e "s|'gnome-2048',|'gnome-2048', symlink_media: false,|g" help/meson.build
-    build-packages:
-      - libc-dev
 
 
   # Find files provided by the base and platform snap and ensure they aren't
