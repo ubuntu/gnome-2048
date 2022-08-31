@@ -22,6 +22,8 @@ apps:
     command: usr/bin/gnome-2048
     desktop: usr/share/applications/org.gnome.TwentyFortyEight.desktop
     common-id: org.gnome.TwentyFortyEight
+    # Disabling Wayland is required while gnome-2048 is based on clutter
+    # Probably will be possible to remove it when it is migrated to Gtk4
     environment:
       DISABLE_WAYLAND: 'true'
 
@@ -38,7 +40,9 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=10)
-      patch -p1 < $CRAFT_PROJECT_DIR/patches/patch1.diff
+      for i in $CRAFT_PROJECT_DIR/patches/*.diff; do
+        patch -p1 < $i
+      done
       sed -i.bak -e "s|'gnome-2048',|'gnome-2048', symlink_media: false,|g" help/meson.build
 
 
