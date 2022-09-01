@@ -1,0 +1,22 @@
+# Update the meson.build file to the last syntax
+
+diff --git a/data/meson.build b/data/meson.build
+index 33f73ca..8974a63 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -17,7 +17,6 @@ install_data(
+ 
+ # Desktop file
+ desktop_file = i18n.merge_file(
+-  'desktop-file',
+   input: 'org.gnome.TwentyFortyEight.desktop.in',
+   output: 'org.gnome.TwentyFortyEight.desktop',
+   install: true,
+@@ -37,7 +36,6 @@ endif
+ 
+ # AppData file
+ appdata_file = i18n.merge_file(
+-  'appdata-file',
+   input: 'org.gnome.TwentyFortyEight.appdata.xml.in',
+   output: 'org.gnome.TwentyFortyEight.appdata.xml',
+   install: true,
