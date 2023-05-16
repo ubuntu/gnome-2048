@@ -32,6 +32,7 @@ parts:
     source: https://gitlab.gnome.org/GNOME/gnome-2048.git
     source-type: git
     source-tag: '3.38.2'
+    source-depth: 1
 # ext:updatesnap
 #   version-format:
 #     lower-than: '3.39'
