@@ -56,6 +56,8 @@ parts:
     plugin: nil
     stage-packages:
       - libgnome-games-support-1-3
+    prime:
+      - usr/lib/*/libgnome-games-support*
 
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
