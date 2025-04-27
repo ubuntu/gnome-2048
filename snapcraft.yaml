@@ -22,10 +22,6 @@ apps:
     command: usr/bin/gnome-2048
     desktop: usr/share/applications/org.gnome.TwentyFortyEight.desktop
     common-id: org.gnome.TwentyFortyEight
-    # Disabling Wayland is required while gnome-2048 is based on clutter
-    # Probably will be possible to remove it when it is migrated to Gtk4
-    environment:
-      DISABLE_WAYLAND: 'true'
 
 parts:
   gnome-2048:
